@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
  * @author MAAG
  *
  */
-public class FloydWarshallTest {
+class FloydWarshallTest {
 
 	/**
 	 * Test method for {@link edu.uvg.graphs.FloydWarshall#CalcularRutas()}.
@@ -18,12 +18,12 @@ public class FloydWarshallTest {
 				{10000,2,4,0,7},
 				{10000,10000,2,7,0}};
 		
-		char[][] matriz_recorridos = 
-			{{'A','B','C','D','E'},
-					{'A','B','C','D','E'},
-					{'A','B','C','D','E'},
-					{'A','B','C','D','E'},
-					{'A','B','C','D','E'}};
+		String[][] matriz_recorridos = 
+			{{"A","B","C","D","E"},
+					{"A","B","C","D","E"},
+					{"A","B","C","D","E"},
+					{"A","B","C","D","E"},
+					{"A","B","C","D","E"}};
 		
 		FloydWarshall algoritmoFW = new FloydWarshall(matriz_distancias, matriz_recorridos, 5);
 
@@ -36,10 +36,26 @@ public class FloydWarshallTest {
 				{6,2,3,0,5},
 				{10,8,2,6,0}};
 		
+		
+		String[][] matriz_recorridos_resultante = 
+			{{"A","B","B","B","C"},
+					{"A","B","C","D","C"},
+					{"A","D","C","D","E"},
+					{"B","B","B","D","C"},
+					{"C","D","C","C","E"}};
+		
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				assertEquals(matriz_distancias_resultante[i][j], 
 						algoritmoFW.getDistancias()[i][j]);
+			}
+		}
+		
+		
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				assertEquals(matriz_recorridos_resultante[i][j], 
+						algoritmoFW.getRecorridos()[i][j]);
 			}
 		}
 	}
