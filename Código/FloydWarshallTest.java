@@ -60,4 +60,62 @@ class FloydWarshallTest {
 		}
 	}
 
+	@Test
+	void testArchivo() throws Exception{
+
+		Controladora controladora = new Controladora(4);
+
+		ArrayList<String> lineasDatos = new ArrayList<String>();
+		lineasDatos.add("BuenosAires SaoPaulo 10 15 20 50");
+		lineasDatos.add("BuenosAires Lima 15 20 30 70");
+		lineasDatos.add("Lima Quito 10 12 15 20");
+
+		controladora.leerArchivo(lineasDatos);
+		
+		int[][] matriz_distancias_normales = {{0,10,15,1000000000},
+				{1000000000,0,1000000000,1000000000},
+				{1000000000,1000000000,0,10},
+				{1000000000,1000000000,1000000000,0}};
+
+		int[][] matriz_distancias_lluvia = {{0,15,20,1000000000},
+				{1000000000,0,1000000000,1000000000},
+				{1000000000,1000000000,0,12},
+				{1000000000,1000000000,1000000000,0}};
+		
+		int[][] matriz_distancias_nieve = {{0,20,30,1000000000},
+				{1000000000,0,1000000000,1000000000},
+				{1000000000,1000000000,0,15},
+				{1000000000,1000000000,1000000000,0}};
+		
+		int[][] matriz_distancias_tormenta = {{0,50,70,1000000000},
+				{1000000000,0,1000000000,1000000000},
+				{1000000000,1000000000,0,20},
+				{1000000000,1000000000,1000000000,0}};
+
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(matriz_distancias_normales[i][j], 
+						controladora.getDistanciasNormal()[i][j]);
+			}
+		}
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(matriz_distancias_lluvia[i][j], 
+						controladora.getDistanciasLluvia()[i][j]);
+			}
+		}
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(matriz_distancias_nieve[i][j], 
+						controladora.getDistanciasNieve()[i][j]);
+			}
+		}
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(matriz_distancias_tormenta[i][j], 
+						controladora.getDistanciasTormenta()[i][j]);
+			}
+		}
+	}
+
 }
